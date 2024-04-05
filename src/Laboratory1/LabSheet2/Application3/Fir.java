@@ -1,43 +1,54 @@
 package Laboratory1.LabSheet2.Application3;
 
 import java.util.Observable;
+import java.util.Random;
 
-public class Fir extends Observable implements Runnable {
-    int id;
-    int processorLoad;
+class Fir extends Observable implements Runnable {
+
+    private Thread thread;
+    private int id;
+    private Window window;
+    private boolean running = true;
+    private int speed;
     int priority;
-    int c=0;
-    Thread t;
-    public void start(){
-        if(t==null){
-            t = new Thread(this);
-            t.setPriority(this.priority);
-            t.start();
+
+    Fir(int id, int priority, Window win) {
+        this.id = id;
+        this.priority = priority;
+        this.window = win;
+        Random rand = new Random();
+        this.speed = rand.nextInt(5) + 1;
+    }
+
+    @Override
+    public void run() {
+        int windowHeight = window.getHeight();
+        int squareHeight = window.getSquareHeight();
+        int y = 0;
+
+        while (y + squareHeight <= windowHeight && running) {
+            y += speed;
+            window.updateSquarePosition(id, y);
+
+            try {
+                Thread.sleep(10);
+            } catch (InterruptedException e) {
+                break;
+            }
+        }
+        stop();
+    }
+    public void start() {
+        if (thread == null) {
+            thread = new Thread(this);
+            thread.setPriority(this.priority);
+            thread.start();
         }
     }
-    Fir(int id,int priority,Window win, int procLoad){
-        this.id=id;
-        this.addObserver(win);
-        this.processorLoad=procLoad;
-        this.priority = priority;
-    }
-    public int getC(){
-        return this.c;
-    }
-    public int getId(){
-        return this.id;
-    }
-
-    public void run(){
-        c=0;
-        while(c<1000){
-            for(int j=0;j<this.processorLoad;j++){
-                j++;j--;
-            }
-            c++;
-            System.out.println("Thread " + this.id + ": c = " + this.c);
-            this.setChanged();
-            notifyObservers();
+    public void stop() {
+        running = false;
+        if (thread != null) {
+            thread.interrupt();
         }
     }
 }

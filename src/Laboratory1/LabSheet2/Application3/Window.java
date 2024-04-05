@@ -1,49 +1,42 @@
 package Laboratory1.LabSheet2.Application3;
 
-import java.util.ArrayList;
+import Laboratory1.LabSheet2.Application2.Fir;
 
 import javax.swing.JFrame;
-
-import javax.swing.JProgressBar;
-
+import java.util.ArrayList;
+import java.util.Observable;
 import java.util.Observer;
 
-import java.util.Observable;
-
-public class Window extends JFrame implements Observer {
-
-    ArrayList<JProgressBar> bars=new ArrayList<JProgressBar>();
+class Window extends JFrame implements Observer {
+    final int SQUARE_SIZE = 88;
+    ArrayList<SquarePanel> squares = new ArrayList<>();
 
     public Window(int nrThreads) {
-
         setLayout(null);
-
-        setSize(450,400);
-
+        setSize(400, 400);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
 
-        init(nrThreads);
-
-        this.setVisible(true);
-    }
-    private void init(int n){
-
-        for(int i=0 ;i<n; i++){
-
-            JProgressBar pb=new JProgressBar();
-
-            pb.setMaximum(1000);
-
-            pb.setBounds(50,(i+1)*30,350,20);
-
-            this.add(pb);
-
-            this.bars.add(pb);
+        for (int i = 0; i < nrThreads; i++) {
+            SquarePanel sq = new SquarePanel();
+            sq.setLocation(50 + i * 100, 0);
+            add(sq);
+            squares.add(sq);
         }
+
+        setVisible(true);
+    }
+
+    public void updateSquarePosition(int id, int newY) {
+        SquarePanel sq = squares.get(id);
+        sq.setLocation(sq.getX(), newY);
+        repaint();
+    }
+    public int getSquareHeight() {
+        return SQUARE_SIZE;
     }
     @Override
     public void update(Observable fir, Object arg){
 
-        bars.get(((Fir)fir).getId()).setValue(((Fir)fir).getC());
+    updateSquarePosition(((Fir)fir).getId(), ((Fir)fir).getC());
     }
 }
