@@ -1,4 +1,5 @@
-package Laboratory2.Example;
+package Laboratory1.LabSheet2.Application1;
+
 
 public class Fir extends Thread {
 

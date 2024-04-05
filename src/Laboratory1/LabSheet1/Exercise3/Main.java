@@ -1,4 +1,4 @@
-package Laboratory1.Exercise3;
+package Laboratory1.LabSheet1.Exercise3;
 import java.util.*;
 public class Main {
     public static void main(String[] args) {

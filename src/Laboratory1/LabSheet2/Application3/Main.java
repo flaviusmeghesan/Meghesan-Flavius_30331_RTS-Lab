@@ -1,4 +1,4 @@
-package Laboratory2.Exercise1;
+package Laboratory1.LabSheet2.Application3;
 public class Main {
 
     private static final int noOfThreads = 6;

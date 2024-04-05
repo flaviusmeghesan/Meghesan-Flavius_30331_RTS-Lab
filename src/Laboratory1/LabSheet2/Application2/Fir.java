@@ -1,4 +1,5 @@
-package Laboratory2.Exercise1;
+package Laboratory1.LabSheet2.Application2;
+
 
 import java.util.Observable;
 

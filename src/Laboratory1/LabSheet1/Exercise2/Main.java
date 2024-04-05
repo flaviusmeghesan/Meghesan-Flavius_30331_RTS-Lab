@@ -1,4 +1,4 @@
-package Laboratory1.Exercise2;
+package Laboratory1.LabSheet1.Exercise2;
 
 public class Main {
     public static void main(String[] args){

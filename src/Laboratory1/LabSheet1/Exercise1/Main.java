@@ -1,4 +1,4 @@
-package Laboratory1.Exercise1;
+package Laboratory1.LabSheet1.Exercise1;
 import java.util.Scanner;
 
 
