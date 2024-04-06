@@ -9,7 +9,7 @@ import java.util.Observer;
 
 class Window extends JFrame implements Observer {
     final int SQUARE_SIZE = 88;
-    ArrayList<SquarePanel> squares = new ArrayList<>();
+    ArrayList<Square> squares = new ArrayList<>();
 
     public Window(int nrThreads) {
         setLayout(null);
@@ -17,7 +17,7 @@ class Window extends JFrame implements Observer {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
 
         for (int i = 0; i < nrThreads; i++) {
-            SquarePanel sq = new SquarePanel();
+            Square sq = new Square();
             sq.setLocation(50 + i * 100, 0);
             add(sq);
             squares.add(sq);
@@ -27,7 +27,7 @@ class Window extends JFrame implements Observer {
     }
 
     public void updateSquarePosition(int id, int newY) {
-        SquarePanel sq = squares.get(id);
+        Square sq = squares.get(id);
         sq.setLocation(sq.getX(), newY);
         repaint();
     }

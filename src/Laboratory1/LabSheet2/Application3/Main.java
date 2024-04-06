@@ -9,9 +9,6 @@ class Main {
             f.addObserver(win);
             f.start();
         }
-
     }
-
-
 }
 
