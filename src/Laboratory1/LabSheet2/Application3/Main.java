@@ -1,14 +1,15 @@
 package Laboratory1.LabSheet2.Application3;
-class Main {
-    private static final int noOfThreads = 3;
+import javax.swing.*;
+import java.awt.*;
+import java.util.Random;
 
+public class Main {
     public static void main(String[] args) {
-        Window win = new Window(noOfThreads);
-        for (int i = 0; i < noOfThreads; i++) {
-            Fir f = new Fir(i, i+2, win);
-            f.addObserver(win);
-            f.start();
-        }
+        SwingUtilities.invokeLater(() -> {
+            int[] maxSpeeds = {6, 8, 7};
+            MovingShapesApplication app = new MovingShapesApplication(maxSpeeds);
+            app.startMoving();
+        });
     }
 }
 
